@@ -1,19 +1,20 @@
 <!DOCTYPE html>
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formularz Alka</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
-
-display: flex;
+            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
+
         .form-container {
             background: #ffffff;
             padding: 20px;
@@ -21,16 +22,22 @@ display: flex;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 400px;
         }
+
         h1 {
             text-align: center;
             color: #333;
         }
+
         label {
             display: block;
             margin: 15px 0 5px;
             color: #555;
         }
-        input, select, textarea, button {
+
+        input,
+        select,
+        textarea,
+        button {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -38,6 +45,7 @@ display: flex;
             border-radius: 5px;
             font-size: 16px;
         }
+
         button {
             background-color: #007BFF;
             color: white;
@@ -45,19 +53,29 @@ display: flex;
             cursor: pointer;
             font-size: 16px;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .button-group {
             display: flex;
             justify-content: space-between;
         }
+
+        p {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
     </style>
 </head>
+
 <body>
     <div class="form-container">
         <h1>Rejestracja na siłownie</h1>
-      <form action="mailto:twojadres@email.com?subject=Rejestracja na siłownie" method="POST" enctype="text/plain">
+        <!-- Formularz z mailto -->
+        <form action="mailto:twojadres@email.com?subject=Rejestracja na siłownie" method="POST" enctype="text/plain">
             <!-- Pole tekstowe -->
             <label for="name">Imię i nazwisko:</label>
             <input type="text" id="name" name="name" placeholder="Wprowadź swoje imię i nazwisko" required>
@@ -80,7 +98,6 @@ display: flex;
             <label for="sila">Siłowy</label><br>
             <input type="radio" id="crossfit" name="rodzaj" value="crossfit">
             <label for="crossfit">Crossfit</label><br>
-            
 
             <!-- Pole tekstowe wielowierszowe -->
             <label for="message">Uwagi dodatkowe:</label>
@@ -89,10 +106,10 @@ display: flex;
             <div class="button-group">
                 <button type="submit">Wyślij</button>
                 <button type="reset">Wyczyść dane</button>
-        
-<p style="text-align: center; font-size: 12px; color: #888;">by Alek Krowicki</p>    
             </div>
         </form>
+        <p>by Alek Krowicki</p>
     </div>
 </body>
+
 </html>
