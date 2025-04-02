@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalendarz, Zegar i Licznik</title>
+    <script>
+        // Zegar
+        function updateClock() {
+            let now = new Date();
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let seconds = now.getSeconds().toString().padStart(2, '0');
+
+            document.getElementById("clock").innerHTML = `Zegar: ${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+
+        // Licznik czasu
+        let secondsOnPage = 0;
+        function updateCounter() {
+            secondsOnPage++;
+            document.getElementById("counter").innerHTML = `Czas na stronie: ${secondsOnPage}s`;
+        }
+        setInterval(updateCounter, 1000);
+
+        // Rok przestępny
+        function rokPrzestepny(rok) {
+            return (rok % 4 === 0 && (rok % 100 !== 0 || rok % 400 === 0));
+        }
+
+        // Kalendarz
+        function printCalendar() {
+            let data = new Date();
+            let rok = data.getFullYear();
+            let miesiac = data.getMonth();
+            let dzis = data.getDate();
+
+            let nazwaMiesiaca;
+            let dniWMiesiacu;
+            switch (miesiac) {
+                case 0: nazwaMiesiaca = "Styczeń"; dniWMiesiacu = 31; break;
+                case 1: nazwaMiesiaca = "Luty"; dniWMiesiacu = rokPrzestepny(rok) ? 29 : 28; break;
+                case 2: nazwaMiesiaca = "Marzec"; dniWMiesiacu = 31; break;
+                case 3: nazwaMiesiaca = "Kwiecień"; dniWMiesiacu = 30; break;
+                case 4: nazwaMiesiaca = "Maj"; dniWMiesiacu = 31; break;
+                case 5: nazwaMiesiaca = "Czerwiec"; dniWMiesiacu = 30; break;
+                case 6: nazwaMiesiaca = "Lipiec"; dniWMiesiacu = 31; break;
+                case 7: nazwaMiesiaca = "Sierpień"; dniWMiesiacu = 31; break;
+                case 8: nazwaMiesiaca = "Wrzesień"; dniWMiesiacu = 30; break;
+                case 9: nazwaMiesiaca = "Październik"; dniWMiesiacu = 31; break;
+                case 10: nazwaMiesiaca = "Listopad"; dniWMiesiacu = 30; break;
+                case 11: nazwaMiesiaca = "Grudzień"; dniWMiesiacu = 31; break;
+            }
+
+            let pierwszDzienMiesiaca = new Date(rok, miesiac, 1).getDay();
+            if (pierwszDzienMiesiaca === 0) pierwszDzienMiesiaca = 7;
+
+            document.write(`<table border="1" style="margin: 30px auto; border-collapse: collapse; text-align: center; font-size: 22px; width: 70%; background: #f0f8ff;">`);
+            document.write(`<tr><th colspan="7" style="background: #6495ed; padding: 20px; color: white;">${nazwaMiesiaca} ${rok}</th></tr>`);
+            document.write(`<tr>
+                <th style="background: #4169e1; color: white; padding: 15px;">Pon</th>
+                <th style="background: #4169e1; color: white; padding: 15px;">Wt</th>
+                <th style="background: #4169e1; color: white; padding: 15px;">Śr</th>
+                <th style="background: #4169e1; color: white; padding: 15px;">Czw</th>
+                <th style="background: #4169e1; color: white; padding: 15px;">Pt</th>
+                <th style="background: #4169e1; color: white; padding: 15px;">Sob</th>
+                <th style="background: #4169e1; color: white; padding: 15px;">Nd</th>
+            </tr><tr>`);
+
+            for (let i = 0; i < pierwszDzienMiesiaca - 1; i++) {
+                document.write("<td></td>");
+            }
+
+            for (let i = 1; i <= dniWMiesiacu; i++) {
+                let styl = `style="background-color: #add8e6; padding: 15px;"`;
+                if (i === dzis) {
+                    styl = `style="background-color: #32cd32; font-weight: bold; padding: 15px; color: white;"`;
+                }
+                document.write(`<td ${styl}>${i}</td>`);
+
+                if ((i + pierwszDzienMiesiaca - 1) % 7 === 0) {
+                    document.write("</tr><tr>");
+                }
+            }
+
+            document.write("</tr></table>");
+        }
+    </script>
+</head>
+<body onload="printCalendar()">
+    <div id="clock" style="font-size: 28px; margin: 15px 0; padding: 12px; background: white; display: inline-block; border-radius: 8px; box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.3);"></div>
+    <div id="counter" style="font-size: 28px; margin: 15px 0; padding: 12px; background: white; display: inline-block; border-radius: 8px; box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.3);"></div>
+</body>
+</html>
